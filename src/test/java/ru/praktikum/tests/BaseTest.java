@@ -19,8 +19,6 @@ public class BaseTest {
 
         driver = DriverFactory.createDriver(browser);
 
-        driver.manage().window().maximize();
-
         driver.get(Constants.BASE_URL);
 
         mainPage = new MainPage(driver);

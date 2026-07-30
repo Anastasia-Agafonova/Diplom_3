@@ -2,6 +2,7 @@ package ru.praktikum.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import io.qameta.allure.Step;
 
 public class RegisterPage {
 
@@ -28,22 +29,28 @@ public class RegisterPage {
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
     }
+
+    @Step("Ввести имя: {name}")
     public void enterName(String name) {
         driver.findElement(nameInput).sendKeys(name);
     }
 
+    @Step("Ввести email: {email}")
     public void enterEmail(String email) {
         driver.findElement(emailInput).sendKeys(email);
     }
 
+    @Step("Ввести пароль")
     public void enterPassword(String password) {
         driver.findElement(passwordInput).sendKeys(password);
     }
 
+    @Step("Кликнуть по кнопке 'Зарегистрироваться'")
     public void clickRegisterButton() {
         driver.findElement(registerButton).click();
     }
 
+    @Step("Зарегистрировать пользователя с именем: {name} и email: {email}")
     public void register(String name, String email, String password) {
         enterName(name);
         enterEmail(email);
@@ -51,10 +58,12 @@ public class RegisterPage {
         clickRegisterButton();
     }
 
+    @Step("Кликнуть по ссылке 'Войти' на странице регистрации")
     public void clickLoginLink() {
         driver.findElement(loginLink).click();
     }
 
+    @Step("Получить текст ошибки некорректного пароля")
     public String getPasswordErrorText() {
         return driver.findElement(passwordError).getText();
     }

@@ -12,36 +12,34 @@ public class ConstructorTest extends BaseTest {
     @DisplayName("Переход к разделу 'Соусы'")
     @Description("Проверка активации вкладки 'Соусы' при клике")
     public void clickSaucesTabSwitchToSaucesTest() {
-        MainPage mainPageLocal = new MainPage(driver);
+        MainPage mainPage = new MainPage(driver);
 
-        mainPageLocal.clickSaucesTab();
+        mainPage.clickSaucesTab();
 
-        Assert.assertTrue("Вкладка 'Соусы' не активировалась", mainPageLocal.isSaucesTabActive());
+        Assert.assertTrue("Вкладка 'Соусы' не активировалась", mainPage.isSaucesTabActive());
     }
 
     @Test
     @DisplayName("Переход к разделу 'Начинки'")
     @Description("Проверка активации вкладки 'Начинки' при клике")
     public void clickFillingsTabSwitchToFillingsTest() {
-        MainPage mainPageLocal = new MainPage(driver);
+        MainPage mainPage = new MainPage(driver);
 
-        mainPageLocal.clickFillingTab();
+        mainPage.clickFillingTab();
 
-        Assert.assertTrue("Вкладка 'Начинки' не активировалась", mainPageLocal.isFillingsTabActive());
+        Assert.assertTrue("Вкладка 'Начинки' не активировалась", mainPage.isFillingsTabActive());
     }
 
     @Test
     @DisplayName("Переход к разделу 'Булки'")
     @Description("Проверка возврата к вкладке 'Булки' после переключения на другую вкладку")
     public void clickBunsTabSwitchToBunsTest() {
-        MainPage mainPageLocal = new MainPage(driver);
+        MainPage mainPage = new MainPage(driver);
 
         // По умолчанию активны "Булки". Сначала переключаемся на "Соусы", чтобы сменить состояние
-        mainPageLocal.clickSaucesTab();
-        mainPageLocal.isSaucesTabActive();
+        mainPage.clickSaucesTab();
+        mainPage.clickBunsTab();
 
-        mainPageLocal.clickBunsTab();
-
-        Assert.assertTrue("Вкладка 'Булки' не активировалась при обратном переключении", mainPageLocal.isBunsTabActive());
+        Assert.assertTrue("Вкладка 'Булки' не активировалась при обратном переключении", mainPage.isBunsTabActive());
     }
 }

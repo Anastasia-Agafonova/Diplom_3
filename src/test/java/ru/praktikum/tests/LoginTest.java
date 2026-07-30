@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import ru.praktikum.api.UserClient;
 import ru.praktikum.models.User;
 import ru.praktikum.pages.ForgotPasswordPage;
@@ -18,14 +16,11 @@ import ru.praktikum.pages.MainPage;
 import ru.praktikum.pages.RegisterPage;
 import ru.praktikum.utils.UserGenerator;
 
-import java.time.Duration;
-
 public class LoginTest extends BaseTest {
 
     private UserClient userClient;
     private User user;
     private String accessToken;
-    private WebDriverWait wait;
 
     @Before
     public void createUser() {
@@ -41,7 +36,6 @@ public class LoginTest extends BaseTest {
                 .jsonPath()
                 .getString("accessToken");
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     @After
@@ -63,7 +57,7 @@ public class LoginTest extends BaseTest {
         loginPage.login(user.getEmail(), user.getPassword());
 
         Assert.assertTrue("Кнопка 'Оформить заказ' не отобразилась после логина",
-                new MainPage(driver).isMakeOrderButtonDisplayed());
+                mainPage.isMakeOrderButtonDisplayed());
     }
 
     @Test
@@ -77,7 +71,7 @@ public class LoginTest extends BaseTest {
         loginPage.login(user.getEmail(), user.getPassword());
 
         Assert.assertTrue("Кнопка 'Оформить заказ' не отобразилась после логина через Личный кабинет",
-                new MainPage(driver).isMakeOrderButtonDisplayed());
+                mainPage.isMakeOrderButtonDisplayed());
     }
 
     @Test
@@ -96,7 +90,7 @@ public class LoginTest extends BaseTest {
         loginPage.login(user.getEmail(), user.getPassword());
 
         Assert.assertTrue("Кнопка 'Оформить заказ' не отобразилась после логина из формы регистрации",
-                new MainPage(driver).isMakeOrderButtonDisplayed());
+                mainPage.isMakeOrderButtonDisplayed());
     }
 
     @Test
@@ -117,6 +111,6 @@ public class LoginTest extends BaseTest {
         loginPage.login(user.getEmail(), user.getPassword());
 
         Assert.assertTrue("Кнопка 'Оформить заказ' не отобразилась после логина из формы восстановления пароля",
-                new MainPage(driver).isMakeOrderButtonDisplayed());
+                mainPage.isMakeOrderButtonDisplayed());
     }
 }

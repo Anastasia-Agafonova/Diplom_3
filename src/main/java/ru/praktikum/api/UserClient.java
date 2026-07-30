@@ -1,5 +1,6 @@
 package ru.praktikum.api;
 
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -9,7 +10,7 @@ public class UserClient {
 
     private static final String BASE_URL = "https://stellarburgers.education-services.ru";
 
-    // Создание пользователя
+    @Step("Создать пользователя {user.email}")
     public Response createUser(User user) {
         return RestAssured
                 .given()
@@ -19,6 +20,7 @@ public class UserClient {
     }
 
     // Авторизация пользователя
+    @Step("Авторизовать пользователя {user.email}")
     public Response loginUser(User user) {
         return RestAssured
                 .given()
@@ -28,6 +30,7 @@ public class UserClient {
     }
 
     // Удаление пользователя
+    @Step("Удалить пользователя по токену")
     public Response deleteUser(String accessToken) {
         return RestAssured
                 .given()

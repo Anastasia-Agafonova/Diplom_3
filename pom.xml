@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
     <groupId>org.example</groupId>
     <artifactId>Diplom_3</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -13,7 +12,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <aspectj.version>1.9.7</aspectj.version>
+        <aspectj.version>1.9.22</aspectj.version> <!-- Обновлено для стабильной интеграции -->
         <allure.version>2.24.0</allure.version>
     </properties>
 
@@ -39,6 +38,13 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.9.2</version>
+        </dependency>
+
+        <!-- Базовые аннотации Allure (работают в src/main и src/test) -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allure.version}</version>
         </dependency>
 
         <!-- Allure JUnit 4 Adapter -->
@@ -93,12 +99,15 @@
                 </configuration>
             </plugin>
 
-
+            <!-- Плагин Сурефайр для запуска тестов с AspectJ -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <properties>
                         <property>
                             <name>listener</name>

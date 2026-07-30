@@ -4,15 +4,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.praktikum.models.User;
 import ru.praktikum.pages.LoginPage;
 import ru.praktikum.pages.MainPage;
 import ru.praktikum.pages.RegisterPage;
 import ru.praktikum.utils.UserGenerator;
-
-import java.time.Duration;
 
 public class RegisterTest extends BaseTest {
 
@@ -23,7 +19,7 @@ public class RegisterTest extends BaseTest {
 
         User user = UserGenerator.createRandomUser();
 
-        MainPage mainPageLocal = new MainPage(driver);
+        MainPage mainPage = new MainPage(driver);
         mainPage.clickLoginButton();
 
         LoginPage loginPage = new LoginPage(driver);
@@ -32,8 +28,7 @@ public class RegisterTest extends BaseTest {
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.register(user.getName(), user.getEmail(), user.getPassword());
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        boolean isUrlCorrect = wait.until(ExpectedConditions.urlContains("/login"));
+        boolean isUrlCorrect = loginPage.isLoginPageOpened();
 
         Assert.assertTrue("После успешной регистрации не произошел переход на страницу /login", isUrlCorrect);
     }
@@ -44,7 +39,7 @@ public class RegisterTest extends BaseTest {
     public void registerWithShortPasswordTest() {
         User user = UserGenerator.createRandomUser();
 
-        MainPage mainPageLocal = new MainPage(driver);
+        MainPage mainPage = new MainPage(driver);
         mainPage.clickLoginButton();
 
         LoginPage loginPage = new LoginPage(driver);

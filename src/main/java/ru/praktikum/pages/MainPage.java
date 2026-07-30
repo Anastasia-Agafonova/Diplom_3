@@ -1,5 +1,6 @@
 package ru.praktikum.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -37,38 +38,47 @@ public class MainPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
+    @Step("Кликнуть по кнопке 'Войти в аккаунт'")
     public void clickLoginButton() {
-        driver.findElement(loginButton).click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton))
+                .click();
     }
 
+    @Step("Проверить, отображается ли кнопка 'Оформить заказ'")
     public boolean isMakeOrderButtonDisplayed() {
         try {
-            // Ждем до 5 секунд, пока кнопка "Оформить заказ" станет видимой
+
             return wait.until(ExpectedConditions.visibilityOfElementLocated(makeOrderButton)).isDisplayed();
         } catch (Exception e) {
-            // Если кнопка не появилась за 5 секунд, возвращаем false
-            return false;
+             return false;
         }
     }
 
+    @Step("Кликнуть по кнопке 'Личный Кабинет'")
     public void clickPersonalAccountButton() {
         driver.findElement(personalAccountButton).click();
     }
 
+    @Step("Перейти на вкладку 'Булки'")
     public void clickBunsTab() {
-        driver.findElement(bunsTab).click();
+        wait.until(ExpectedConditions.elementToBeClickable(bunsTab))
+                .click();
     }
 
+    @Step("Перейти на вкладку 'Соусы'")
     public void clickSaucesTab() {
-        driver.findElement(saucesTab).click();
+        wait.until(ExpectedConditions.elementToBeClickable(saucesTab))
+                .click();
     }
 
+    @Step("Перейти на вкладку 'Начинки'")
     public void clickFillingTab() {
-        driver.findElement(fillingsTab).click();
+        wait.until(ExpectedConditions.elementToBeClickable(fillingsTab))
+                .click();
     }
 
     // Проверка активной вкладки
-
+    @Step("Проверить, активна ли вкладка 'Булки'")
     public boolean isBunsTabActive() {
         try {
             return wait.until(ExpectedConditions.textToBePresentInElementLocated(currentTab, "Булки"));
@@ -77,6 +87,7 @@ public class MainPage {
         }
     }
 
+    @Step("Проверить, активна ли вкладка 'Соусы'")
     public boolean isSaucesTabActive() {
         try {
             return wait.until(ExpectedConditions.textToBePresentInElementLocated(currentTab, "Соусы"));
@@ -85,6 +96,7 @@ public class MainPage {
         }
     }
 
+    @Step("Проверить, активна ли вкладка 'Начинки'")
     public boolean isFillingsTabActive() {
         try {
             return wait.until(ExpectedConditions.textToBePresentInElementLocated(currentTab, "Начинки"));
